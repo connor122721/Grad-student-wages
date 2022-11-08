@@ -1,5 +1,8 @@
 # Exploration of the Cost of living and Grad. Student wages
-# Data collected from Chemistry PhD students across several universities in the US.
-# Data=2022
-Collected by Kendall Branham
-11/8/2022
+## > COL = Cost of Living
+## > Wages = Self reported PhD Salary
+
+# Data collected from PhD students across several universities in the US.
+## Data from: https://www.phdstipends.com/
+### Collected by Kendall Branham & Connor S. Murray
+### 11/8/2022
