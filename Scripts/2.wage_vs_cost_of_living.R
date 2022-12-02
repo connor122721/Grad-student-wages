@@ -1,7 +1,7 @@
 # Cost of living vs Grad. Student Salary
 # Anaalyzed by Connor S. Murray
 # csm6hg@virginia.edu
-# 11.8.2022
+# 12.2.2022
 
 # Libraries
 library(data.table)
@@ -130,3 +130,54 @@ box_col_2 <- {dt4 %>%
           legend.position = "none",
           text = element_text(face = "bold", size=22),
           axis.title = element_text(face="bold", size=20))}
+
+
+# Subset example schools
+dt <- data.table(read.csv("Data/GradStipends.csv"))
+
+# Plot - wage vs cost
+dt[!X=="UVA"] %>% 
+  ggplot(.,
+         aes(x=as.numeric(COL),
+             y=as.numeric(Stipend),
+             label=X)) +
+  geom_smooth(method = "lm", 
+              linetype=2, 
+              size=2, 
+              color="steelblue",
+              se = F) +
+  geom_label_repel(size=6) +
+  geom_label(data = dt[X=="UVA"], color="Red", size=6) +
+  theme_classic() +
+  labs(x="Cost of living",
+       y="Grad. Student Salary") +
+  theme(axis.text.x = element_text(face="bold", size=18),
+        axis.text.y = element_text(face="bold", size=18),
+        axis.title.x = element_text(face="bold", size=20),
+        axis.title.y = element_text(face="bold", size=20),
+        text = element_text(face = "bold", size=22),
+        axis.title = element_text(face="bold", size=20))
+
+# Plot 
+dt[!X=="UVA"] %>% 
+  ggplot(.,
+         aes(x=1,
+             y=as.numeric(Stipend)/as.numeric(COL),
+             label=X)) +
+  geom_smooth(method = "lm", 
+              linetype=2, 
+              size=2, 
+              color="steelblue",
+              se = F) +
+  geom_point() +
+  geom_label(data = dt[X=="UVA"], color="Red", size=6) +
+  geom_label_repel(size=6) +
+  theme_classic() +
+  labs(x="",
+       y="Adjusted wage") +
+  theme(axis.text.x = element_blank(),
+        axis.text.y = element_text(face="bold", size=18),
+        axis.title.x = element_text(face="bold", size=20),
+        axis.title.y = element_text(face="bold", size=20),
+        text = element_text(face = "bold", size=22),
+        axis.title = element_text(face="bold", size=20))
